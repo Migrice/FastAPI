@@ -1,0 +1,29 @@
+version: '3'
+services:
+  core_api:
+    build: .
+    container_name: "nzhinufarm"
+    command: uvicorn nzhinuFarm.main:app --reload --host 0.0.0.0 --port 8000 
+    ports:
+      - "8000:8000" # on accede au port 8000 sur la machine hote, qui va faire le matching avec le port 15400 du container, car dans le dockerfile, le port specifié est le port 15400
+    volumes:
+      - ./app/:/app
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    container_name: postgres
+    restart: always
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=emel
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=nzhfarm
+    expose:
+      - 5432
+    
+volumes:
+  postgres-db:
+

@@ -1,0 +1,16 @@
+.idea
+__pycache__/
+*.py[cod]
+database.db
+
+# Environments
+
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.env
+
+*.pyc
